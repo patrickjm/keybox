@@ -1,0 +1,35 @@
+version: 2
+
+project_name: keybox
+
+builds:
+  - id: keybox
+    main: .
+    binary: keybox
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+    goos:
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - format: tar.gz
+
+brews:
+  - name: keybox
+    homepage: https://github.com/patrickjm/keybox
+    description: Store reusable env var sets in macOS Keychain and emit .env files
+    license: MIT
+    repository:
+      owner: patrickjm
+      name: homebrew-tap
+    directory: Formula
+    install: |
+      bin.install "keybox"
+    test: |
+      system "#{bin}/keybox", "--help"

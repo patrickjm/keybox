@@ -8,6 +8,12 @@ Store reusable env var sets in macOS Keychain and emit .env files on demand.
 go install ./...
 ```
 
+## Install (Homebrew)
+
+```bash
+brew install patrickjm/tap/keybox
+```
+
 ## Usage
 
 ```bash
@@ -20,6 +26,15 @@ keybox set aws/dev AWS_ACCESS_KEY_ID=... AWS_SECRET_ACCESS_KEY=...
 
 # Emit a .env payload (multiple sets merge, later overrides earlier)
 keybox env aws/dev openai -o .env
+
+# Rename keys on output
+keybox env aws/dev --rename AWS_ACCESS_KEY_ID=AWS_KEY_ID -o .env
+
+# Append without overwrite checks
+keybox env aws/dev -o .env --append
+
+# Overwrite existing keys only with confirmation
+keybox env aws/dev -o .env --confirm-overwrite
 
 # List sets and keys
 keybox list
