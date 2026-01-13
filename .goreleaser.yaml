@@ -28,6 +28,7 @@ brews:
     repository:
       owner: patrickjm
       name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     directory: Formula
     install: |
       bin.install "keybox"
